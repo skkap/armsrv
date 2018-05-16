@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.skkap'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    ['armeria',
+     'armeria-grpc',
+     'armeria-jetty',
+     'armeria-kafka',
+     'armeria-logback',
+     'armeria-retrofit2',
+     'armeria-thrift',
+     'armeria-tomcat'].each {
+        compile "com.linecorp.armeria:${it}:0.63.1"
+    }
+
+    compile('org.springframework.boot:spring-boot-starter')
+    compileOnly('org.projectlombok:lombok')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
