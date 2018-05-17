@@ -9,6 +9,7 @@ import com.linecorp.armeria.common.HttpResponse;
 import com.linecorp.armeria.common.SessionProtocol;
 import com.linecorp.armeria.server.Server;
 import com.linecorp.armeria.server.ServerBuilder;
+import com.linecorp.armeria.server.docs.DocService;
 import com.linecorp.armeria.server.thrift.THttpService;
 
 @SpringBootApplication
@@ -24,6 +25,8 @@ public class ArmsrvApplication {
         sb.service("/", (ctx, res) -> HttpResponse.of("Hello, world!"));
 
         sb.service("/user", THttpService.of(new MyUserService()));
+
+        sb.serviceUnder("/docs", new DocService());
 
         Server server = sb.build();
         CompletableFuture<Void> future = server.start();
