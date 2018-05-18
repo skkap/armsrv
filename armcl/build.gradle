@@ -1,0 +1,23 @@
+group 'com.skkap'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    ['armeria',
+     'armeria-grpc',
+     'armeria-jetty',
+     'armeria-kafka',
+     'armeria-logback',
+     'armeria-retrofit2',
+     'armeria-thrift',
+     'armeria-tomcat'].each {
+        compile "com.linecorp.armeria:${it}:0.63.1"
+    }
+}
